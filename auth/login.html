@@ -9,10 +9,12 @@
 <form id="f" autocomplete="off">
   <label>Username</label><input name="username" required placeholder="Masukkan username">
   <label>Password</label><input name="password" type="password" required placeholder="Masukkan password">
+  <div style="text-align:right;margin-top:8px"><a href="lupa-password.html" style="color:var(--gold);font-weight:600;font-size:13px;text-decoration:none">Lupa password?</a></div>
   <div class="err" id="err"></div>
   <button class="btn gold">Masuk</button>
 </form>
 <p class="sw">Belum punya akun? <a href="register.html">Daftar</a></p>
 </div>
 <script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script>$("#f").onsubmit=ev=>{ev.preventDefault();location.href="../pages/dashboard.html"}</script></body></html>
+<script src="../assets/js/login.js"></script>
+</body></html>

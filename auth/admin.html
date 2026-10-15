@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel Admin – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-auth>
+<div id="content">
+<h2>Panel Admin</h2>
+<form id="fa">
+  <label>Email admin</label><input name="email" type="email" required placeholder="email admin">
+  <label>Kode admin</label><input name="kode" type="password" required placeholder="Masukkan kode admin">
+  <div class="err" id="err"></div>
+  <button class="btn gold">Masuk Admin</button>
+</form>
+<div id="panel" hidden>
+  <p style="color:var(--mut);margin-top:6px">Permintaan reset password dari pengguna.</p>
+  <div id="list" style="margin-top:10px"></div>
+  <div id="hasil" class="glass" style="padding:14px;margin-top:12px" hidden></div>
+  <button class="btn" onclick="keluar()">Keluar admin</button>
+</div>
+<p class="sw"><a href="login.html">← Kembali ke login</a></p>
+</div>
+<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
+<script src="../assets/js/admin.js"></script>
+</body></html>

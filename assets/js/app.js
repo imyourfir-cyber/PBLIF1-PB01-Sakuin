@@ -3,6 +3,11 @@ const $ = s => document.querySelector(s);
 /* ===== Kerangka halaman (sidebar, topbar, toast, modal global) ===== */
 (function shell(){
   const b=document.body, src=$('#content'); if(!src) return;
+  if(!b.hasAttribute('data-auth')){   // halaman aplikasi wajib login
+    const u=USERS().find(x=>x.username===localStorage.sk_session);
+    if(!u){location.replace('../auth/login.html');return}
+    if(u.wajibGanti){location.replace('../auth/ganti-password.html');return}
+  }
   if(localStorage.tema==='light') b.classList.add('light');
   const kids=[...src.childNodes]; src.remove();
   const orbs='<div class="orbs"><i></i><i></i><i></i></div>', toastEl='<div id="toast" class="glass"></div>';
@@ -24,7 +29,7 @@ const $ = s => document.querySelector(s);
       ${nav('dashboard','Dashboard')}${nav('transaksi','Transaksi')}${nav('kategori','Kategori')}${nav('anggaran','Anggaran')}${nav('tabungan','Tabungan')}${nav('laporan','Laporan')}<div class="sp"></div>${nav('pengaturan','Pengaturan')}</aside>
       <main><header class="top glass"><h2>${b.dataset.title||''}</h2><div class="user"><button class="uname" onclick="toggleDD(event)">${e(ME.nama)}</button><button class="av" ${bg} onclick="toggleDD(event)" aria-label="Menu pengguna"></button>
         <div class="dd glass" id="dd"><div class="ddh"><span class="av" ${bg}></span><div><b>${e(ME.nama)}</b><small>@${e(ME.username)}</small></div></div><hr>
-        <a href="profil.html">Profil</a><a href="pengaturan.html">Pengaturan</a><hr><a class="dng" href="../auth/login.html">Logout</a></div></div></header>
+        <a href="profil.html">Profil</a><a href="pengaturan.html">Pengaturan</a><hr><a class="dng" href="../auth/login.html?logout=1">Logout</a></div></div></header>
       <div id="slot" style="display:contents"></div></main></div>`+toastEl+`
       <div class="ov" id="m-del"><div class="glass modal"><h3>Hapus data?</h3><p style="color:var(--mut);margin-top:8px">Data yang dihapus tidak dapat dikembalikan.</p><div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button type="button" class="btn gold" onclick="konfirmHapus()">Ya, hapus</button></div></div></div>
       <div class="ov" id="m-pass"><form class="glass modal" data-demo="Password berhasil diubah." data-pass><h3>Ubah Password</h3>
@@ -81,7 +86,12 @@ function konfirmHapus() { window._b?.closest('tr,.item')?.remove(); closeM(); to
 document.addEventListener('submit', ev => {
   const f = ev.target; if (!f.matches('[data-demo]')) return;
   ev.preventDefault();
-  if (f.hasAttribute('data-pass') && f.baru.value !== f.konfirmasi.value) return toast('Konfirmasi password tidak sama.', true);
+  if (f.hasAttribute('data-pass')) {
+    const us = USERS(), u = us.find(x => x.username === ME.username);
+    if (!u || f.lama.value !== u.password) return toast('Password lama salah.', true);
+    if (f.baru.value !== f.konfirmasi.value) return toast('Konfirmasi password tidak sama.', true);
+    u.password = f.baru.value; SAVE(us);
+  }
   closeM(); toast(f.dataset.demo);
 });
 
@@ -100,3 +110,6 @@ function tglNotif() {
 }
 function setTema(t) { localStorage.tema = t; document.body.classList.toggle('light', t === 'light'); syncSet(); return false; }
 syncSet();
+
+// Pesan singkat antar halaman (mis. setelah daftar / ganti password)
+if (sessionStorage.flash) { toast(sessionStorage.flash); sessionStorage.removeItem('flash'); }

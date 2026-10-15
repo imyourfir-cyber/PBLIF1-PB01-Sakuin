@@ -1,7 +1,17 @@
 // DATA DUMMY (frontend saja, tidak ada database)
 const NOW=new Date(),Y=NOW.getFullYear(),M=String(NOW.getMonth()+1).padStart(2,'0');
 const D=n=>`${Y}-${M}-${String(n).padStart(2,'0')}`, TODAY=D(NOW.getDate());
-const ME={nama:'Andi Pratama',username:'andi',email:'andi@email.com',nim:'2301234',foto:'../assets/img/user_1.jpg'};
+// ===== Akun (disimpan di localStorage browser; ini DEMO tanpa backend) =====
+const SEED=[{nama:'Andi Pratama',username:'andi',email:'andi@email.com',nim:'2301234',password:'123456'}];
+const USERS=()=>{try{const u=JSON.parse(localStorage.sk_users);if(Array.isArray(u)&&u.length)return u}catch(_){}return SEED.map(x=>({...x}))};
+const SAVE=u=>{try{localStorage.sk_users=JSON.stringify(u);return true}catch(_){return false}};
+const REQS=()=>{try{return JSON.parse(localStorage.sk_reset)||[]}catch(_){return[]}};
+const SAVEREQ=r=>{localStorage.sk_reset=JSON.stringify(r)};
+const ADMINS=['imyourfir@gmail.com','ghizellarahmaazzahra@gmail.com'], KODE_ADMIN='sakuin-admin';
+// ME = akun yang sedang login (nama di topbar & sapaan dashboard mengikuti ini)
+const ME=Object.assign({nama:'',username:'',email:'',nim:''},USERS().find(u=>u.username===localStorage.sk_session));
+ME.foto=ME.foto||'../assets/img/user_1.jpg';
+function simpanMe(){const u=USERS(),i=u.findIndex(x=>x.username===ME.username);if(i>-1){Object.assign(u[i],{nama:ME.nama,email:ME.email,nim:ME.nim,foto:ME.foto});SAVE(u)}}
 const K=[{id:1,nama:'Uang Saku',jenis:'Pemasukan'},{id:2,nama:'Beasiswa',jenis:'Pemasukan'},{id:3,nama:'Makan',jenis:'Pengeluaran'},{id:4,nama:'Transportasi',jenis:'Pengeluaran'},{id:5,nama:'Hiburan',jenis:'Pengeluaran'}];
 const T=[{id:1,tgl:D(1),kat:1,nom:1500000,ket:'Kiriman bulanan'},{id:2,tgl:D(3),kat:2,nom:2000000,ket:'Beasiswa semester ganjil'},{id:3,tgl:D(2),kat:3,nom:45000,ket:'Makan siang kantin'},{id:4,tgl:D(4),kat:4,nom:30000,ket:'Ojek online ke kampus'},{id:5,tgl:D(6),kat:3,nom:120000,ket:'Makan bareng teman'},{id:6,tgl:D(7),kat:5,nom:75000,ket:'Nonton bioskop'},{id:7,tgl:D(9),kat:3,nom:85000,ket:'Belanja bahan makanan'},{id:8,tgl:D(10),kat:4,nom:50000,ket:'Isi bensin'},{id:9,tgl:D(12),kat:3,nom:90000,ket:'Makan malam'}];
 const A=[{id:1,kat:null,batas:2000000},{id:2,kat:3,batas:300000},{id:3,kat:5,batas:150000}];

@@ -9,6 +9,7 @@
 <form id="f">
   <label>Nama lengkap</label><input name="nama" required maxlength="100" placeholder="Masukkan nama lengkap">
   <label>Username</label><input name="username" required placeholder="Masukkan username">
+  <label>Email</label><input name="email" type="email" required placeholder="nama@email.com">
   <label>Password</label><input name="password" type="password" required placeholder="Masukkan password">
   <label>Konfirmasi password</label><input name="konfirmasi" type="password" required placeholder="Ulangi password">
   <div class="err" id="err"></div>
@@ -17,4 +18,5 @@
 <p class="sw">Sudah punya akun? <a href="login.html">Masuk</a></p>
 </div>
 <script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script>$("#f").onsubmit=ev=>{ev.preventDefault();const f=ev.target,m=$("#err");if(!/^[A-Za-z0-9_.]{3,50}$/.test(f.username.value))m.textContent="Username 3-50 karakter: huruf, angka, titik, atau garis bawah.";else if(f.password.value.length<6)m.textContent="Password minimal 6 karakter.";else if(f.password.value!==f.konfirmasi.value)m.textContent="Konfirmasi password tidak sama.";else location.href="login.html"}</script></body></html>
+<script src="../assets/js/register.js"></script>
+</body></html>
