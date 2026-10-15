@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daftar – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-auth>
+<div id="content">
+<h2>Buat akun baru</h2>
+<form id="f">
+  <label>Nama lengkap</label><input name="nama" required maxlength="100" placeholder="Masukkan nama lengkap">
+  <label>Username</label><input name="username" required placeholder="Masukkan username">
+  <label>Password</label><input name="password" type="password" required placeholder="Masukkan password">
+  <label>Konfirmasi password</label><input name="konfirmasi" type="password" required placeholder="Ulangi password">
+  <div class="err" id="err"></div>
+  <button class="btn gold">Daftar</button>
+</form>
+<p class="sw">Sudah punya akun? <a href="login.html">Masuk</a></p>
+</div>
+<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
+<script>$("#f").onsubmit=ev=>{ev.preventDefault();const f=ev.target,m=$("#err");if(!/^[A-Za-z0-9_.]{3,50}$/.test(f.username.value))m.textContent="Username 3-50 karakter: huruf, angka, titik, atau garis bawah.";else if(f.password.value.length<6)m.textContent="Password minimal 6 karakter.";else if(f.password.value!==f.konfirmasi.value)m.textContent="Konfirmasi password tidak sama.";else location.href="login.html"}</script></body></html>

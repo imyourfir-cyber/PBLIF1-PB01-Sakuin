@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profil – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-page="profil" data-title="Profil">
+<div id="content">
+<div class="glass pad prof"><h3>Profil</h3><hr>
+  <div class="pav"><div class="av big" id="foto"></div><small>Foto / Avatar Mahasiswa</small>
+    <label class="btn sm" style="display:inline-block;margin:6px 0 0;color:var(--tx);cursor:pointer">Ganti foto<input type="file" id="ff" accept="image/jpeg,image/png,image/webp" hidden></label></div>
+  <div class="sub">Informasi Akun</div>
+  <div id="info"></div>
+  <button class="btn gold" id="ubah">Ubah Profil</button>
+</div>
+<div class="ov" id="m-prof"><form class="glass modal" id="fp"><h3>Ubah Profil</h3>
+  <label>Nama lengkap *</label><input name="nama" required maxlength="100">
+  <label>Username</label><input id="un" disabled>
+  <label>Email</label><input name="email" type="email" placeholder="nama@email.com">
+  <label>NIM (opsional)</label><input name="nim" maxlength="20" placeholder="Masukkan NIM">
+  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
+</div>
+<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
+<script src="../assets/js/profil.js"></script>
+</body></html>

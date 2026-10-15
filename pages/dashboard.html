@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css"></head>
+<body data-page="dashboard" data-title="Dashboard">
+<div id="content">
+<div class="glass pad hello"><h1 id="hi"></h1><p>Ringkasan keuangan bulan ini</p></div>
+<div id="warns" style="display:contents"></div>
+<div class="cards">
+  <div class="glass stat"><small>Total Pemasukan</small><b class="cin" id="s-in"></b></div>
+  <div class="glass stat"><small>Total Pengeluaran</small><b class="cout" id="s-out"></b></div>
+  <div class="glass stat sal"><small>Saldo (keseluruhan)</small><b id="s-sal"></b><small id="s-tab"></small></div>
+</div>
+<div class="two">
+  <div class="glass pad"><h3>Grafik Keuangan</h3><div id="chart"></div></div>
+  <div class="glass pad"><h3>Transaksi Terbaru</h3><div id="baru"></div></div>
+</div>
+</div>
+<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+</body></html>
