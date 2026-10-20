@@ -1,28 +1,91 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tabungan – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabungan – Sakuin</title>
+  <link rel="icon" href="../assets/img/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Gaya aplikasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body data-page="tabungan" data-title="Tabungan">
-<div id="content">
-<div class="cards" style="grid-template-columns:1fr 1fr 1fr">
-  <div class="glass stat"><small>Total Tabungan</small><b class="cin" id="s-tot"></b></div>
-  <div class="glass stat sal"><small>Saldo Tersedia</small><b id="s-sal"></b></div>
-  <div class="glass stat" style="display:grid;place-items:center;gap:8px"><button class="btn gold" onclick="openM('m-tgt')">+ Target Baru</button><a class="btn sm" href="laporan.html?jenis=Tabungan">Lihat Rekap</a></div>
-</div>
-<div class="grid2" id="gr"></div>
-<div class="ov" id="m-tgt"><form class="glass modal" data-demo="Target tabungan disimpan (demo)."><input type="hidden" name="id">
-  <h3 data-add="Target Tabungan Baru" data-edit="Ubah Target Tabungan">Target Tabungan Baru</h3>
-  <label>Nama target *</label><input name="nama" required maxlength="80" placeholder="Contoh: Laptop baru">
-  <label>Jumlah target *</label><input type="number" name="target" min="1" step="1" required placeholder="Rp 0">
-  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
-<div class="ov" id="m-setor"><form class="glass modal" data-demo="Setoran berhasil. Makin dekat ke targetmu!"><input type="hidden" name="id">
-  <h3>Nabung</h3>
-  <label>Target</label><input name="nama" disabled>
-  <label>Tanggal *</label><input type="date" name="tanggal" required>
-  <label>Nominal *</label><input type="number" name="nominal" min="1" step="1" required placeholder="Rp 0">
-  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
-</div>
-<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script src="../assets/js/tabungan.js"></script>
-</body></html>
+  <div id="content">
+
+    <!-- Ringkasan -->
+    <div class="cards" style="grid-template-columns: 1fr 1fr 1fr">
+      <div class="glass stat">
+        <small>Total Tabungan</small>
+        <b class="cin" id="s-tot"></b>
+      </div>
+
+      <div class="glass stat sal">
+        <small>Saldo Tersedia</small>
+        <b id="s-sal"></b>
+      </div>
+
+      <div class="glass stat" style="display: grid; place-items: center; gap: 8px">
+        <button class="btn gold" onclick="openM('m-tgt')">+ Target Baru</button>
+        <a class="btn sm" href="laporan.html?jenis=Tabungan">Lihat Rekap</a>
+      </div>
+    </div>
+
+    <!-- Daftar target (diisi oleh tabungan.js) -->
+    <div class="grid2" id="gr"></div>
+
+    <!-- Modal tambah / ubah target -->
+    <div class="ov" id="m-tgt">
+      <form class="glass modal" data-demo="Target tabungan disimpan (demo).">
+        <input type="hidden" name="id">
+
+        <h3 data-add="Target Tabungan Baru" data-edit="Ubah Target Tabungan">Target Tabungan Baru</h3>
+
+        <label>Nama target *</label>
+        <input name="nama" required maxlength="80" placeholder="Contoh: Laptop baru">
+
+        <label>Jumlah target *</label>
+        <input type="number" name="target" min="1" step="1" required placeholder="Rp 0">
+
+        <div class="acts">
+          <button type="button" class="btn" onclick="closeM()">Batal</button>
+          <button class="btn gold">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal setor tabungan -->
+    <div class="ov" id="m-setor">
+      <form class="glass modal" data-demo="Setoran berhasil. Makin dekat ke targetmu!">
+        <input type="hidden" name="id">
+
+        <h3>Nabung</h3>
+
+        <label>Target</label>
+        <input name="nama" disabled>
+
+        <label>Tanggal *</label>
+        <input type="date" name="tanggal" required>
+
+        <label>Nominal *</label>
+        <input type="number" name="nominal" min="1" step="1" required placeholder="Rp 0">
+
+        <div class="acts">
+          <button type="button" class="btn" onclick="closeM()">Batal</button>
+          <button class="btn gold">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/tabungan.js"></script>
+</body>
+</html>

@@ -1,18 +1,60 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anggaran – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anggaran – Sakuin</title>
+  <link rel="icon" href="../assets/img/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Gaya aplikasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body data-page="anggaran" data-title="Anggaran">
-<div id="content">
-<div class="glass pad bar" style="margin:0"><div><h3 style="font-size:20px" id="jd"></h3><small style="color:var(--mut)">Atur batas total bulanan atau per kategori. Kalau terlampaui, Sakuin akan mengingatkanmu.</small></div>
-  <button class="btn gold" onclick="openM('m-ang')">+ Atur Batas</button></div>
-<div class="grid2" id="gr"></div>
-<div class="ov" id="m-ang"><form class="glass modal" data-demo="Batas pengeluaran disimpan (demo)."><h3>Atur Batas Pengeluaran</h3>
-  <label>Berlaku untuk *</label><select name="kategori" id="ko"></select>
-  <label>Batas maksimal per bulan *</label><input type="number" name="batas" min="1" step="1" required placeholder="Rp 0">
-  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
-</div>
-<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script src="../assets/js/anggaran.js"></script>
-</body></html>
+  <div id="content">
+
+    <!-- Header + tombol atur batas -->
+    <div class="glass pad bar" style="margin: 0">
+      <div>
+        <h3 style="font-size: 20px" id="jd"></h3>
+        <small style="color: var(--mut)">
+          Atur batas total bulanan atau per kategori. Kalau terlampaui, Sakuin akan mengingatkanmu.
+        </small>
+      </div>
+
+      <button class="btn gold" onclick="openM('m-ang')">+ Atur Batas</button>
+    </div>
+
+    <!-- Daftar anggaran (diisi oleh anggaran.js) -->
+    <div class="grid2" id="gr"></div>
+
+    <!-- Modal atur batas pengeluaran -->
+    <div class="ov" id="m-ang">
+      <form class="glass modal" data-demo="Batas pengeluaran disimpan (demo).">
+        <h3>Atur Batas Pengeluaran</h3>
+
+        <label>Berlaku untuk *</label>
+        <select name="kategori" id="ko"></select>
+
+        <label>Batas maksimal per bulan *</label>
+        <input type="number" name="batas" min="1" step="1" required placeholder="Rp 0">
+
+        <div class="acts">
+          <button type="button" class="btn" onclick="closeM()">Batal</button>
+          <button class="btn gold">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/anggaran.js"></script>
+</body>
+</html>

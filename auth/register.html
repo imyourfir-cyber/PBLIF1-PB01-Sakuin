@@ -1,22 +1,53 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Daftar – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daftar – Sakuin</title>
+  <link rel="icon" href="../assets/img/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Gaya aplikasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body data-auth>
-<div id="content">
-<h2>Buat akun baru</h2>
-<form id="f">
-  <label>Nama lengkap</label><input name="nama" required maxlength="100" placeholder="Masukkan nama lengkap">
-  <label>Username</label><input name="username" required placeholder="Masukkan username">
-  <label>Email</label><input name="email" type="email" required placeholder="nama@email.com">
-  <label>Password</label><input name="password" type="password" required placeholder="Masukkan password">
-  <label>Konfirmasi password</label><input name="konfirmasi" type="password" required placeholder="Ulangi password">
-  <div class="err" id="err"></div>
-  <button class="btn gold">Daftar</button>
-</form>
-<p class="sw">Sudah punya akun? <a href="login.html">Masuk</a></p>
-</div>
-<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script src="../assets/js/register.js"></script>
-</body></html>
+  <div id="content">
+
+    <h2>Buat akun baru</h2>
+
+    <form id="f">
+      <label>Nama lengkap</label>
+      <input name="nama" required maxlength="100" placeholder="Masukkan nama lengkap">
+
+      <label>Username</label>
+      <input name="username" required placeholder="Masukkan username">
+
+      <label>Email</label>
+      <input name="email" type="email" required placeholder="nama@email.com">
+
+      <label>Password</label>
+      <input name="password" type="password" required placeholder="Masukkan password">
+
+      <label>Konfirmasi password</label>
+      <input name="konfirmasi" type="password" required placeholder="Ulangi password">
+
+      <!-- Pesan error (diisi oleh register.js) -->
+      <div class="err" id="err"></div>
+
+      <button class="btn gold">Daftar</button>
+    </form>
+
+    <p class="sw">Sudah punya akun? <a href="login.html">Masuk</a></p>
+
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/register.js"></script>
+</body>
+</html>

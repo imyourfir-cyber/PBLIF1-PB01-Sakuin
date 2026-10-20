@@ -1,9 +1,55 @@
-const us = USERS(), u = us.find(x => x.username === localStorage.sk_session);
-if (!u) location.replace('login.html'); else if (!u.wajibGanti) location.replace('../pages/dashboard.html');
+const KUNCI_SESI = 'sk_session';
+const HALAMAN_LOGIN = 'login.html';
+const HALAMAN_DASHBOARD = '../pages/dashboard.html';
+const MIN_PASSWORD = 6;
+
+const users = USERS();
+const user = users.find(x => x.username === localStorage[KUNCI_SESI]);
+
+/* ---------- Penjaga halaman ---------- */
+
+if (!user) {
+  // belum masuk
+  location.replace(HALAMAN_LOGIN);
+} else if (!user.wajibGanti) {
+  // tidak sedang diwajibkan ganti password
+  location.replace(HALAMAN_DASHBOARD);
+}
+
+/* ---------- Validasi ---------- */
+
+/**
+ * Mengembalikan pesan error pertama yang ditemukan, atau '' jika valid.
+ */
+function validasi(f) {
+  if (f.baru.value.length < MIN_PASSWORD) {
+    return `Password baru minimal ${MIN_PASSWORD} karakter.`;
+  }
+  if (f.baru.value === user.password) {
+    return 'Password baru tidak boleh sama dengan password sementara.';
+  }
+  if (f.baru.value !== f.konfirmasi.value) {
+    return 'Konfirmasi password tidak sama.';
+  }
+  return '';
+}
+
+/* ---------- Form ---------- */
+
 $('#f').onsubmit = ev => {
-  ev.preventDefault(); const f = ev.target, m = $('#err');
-  if (f.baru.value.length < 6) m.textContent = 'Password baru minimal 6 karakter.';
-  else if (f.baru.value === u.password) m.textContent = 'Password baru tidak boleh sama dengan password sementara.';
-  else if (f.baru.value !== f.konfirmasi.value) m.textContent = 'Konfirmasi password tidak sama.';
-  else { u.password = f.baru.value; delete u.wajibGanti; SAVE(us); sessionStorage.flash = 'Password baru berhasil disimpan.'; location.href = '../pages/dashboard.html'; }
+  ev.preventDefault();
+  const f = ev.target;
+
+  const error = validasi(f);
+  if (error) {
+    $('#err').textContent = error;
+    return;
+  }
+
+  user.password = f.baru.value;
+  delete user.wajibGanti;
+  SAVE(users);
+
+  sessionStorage.flash = 'Password baru berhasil disimpan.';
+  location.href = HALAMAN_DASHBOARD;
 };

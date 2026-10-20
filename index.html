@@ -1,194 +1,705 @@
 <!DOCTYPE html>
 <html lang="id" data-bs-theme="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sakuin – Kelola Uang Saku dengan Mudah</title>
-<link rel="icon" href="assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-:root{--bg:#04261c;--em2:#1fa57a;--gold:#e6bd62;--gold2:#f8e6ae;--tx:#f2f7f3;--mut:rgba(242,247,243,.62);--in:#6fe0b0;--r:26px;
-  --bs-body-bg:var(--bg);--bs-body-color:var(--tx);--bs-body-font-family:'Plus Jakarta Sans',system-ui,sans-serif}
-[data-bs-theme="light"]{--bg:#e8f4ec;--tx:#0b3b2b;--mut:rgba(11,59,43,.66);--in:#0b7a52;--gold-text:#8a6a1c}
-body{font-weight:500;font-size:14.5px;line-height:1.5;color:var(--tx);background:var(--bg);overflow-x:hidden;min-height:100%}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.01em}
-:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-.mut{color:var(--mut)}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sakuin – Kelola Uang Saku dengan Mudah</title>
+  <link rel="icon" href="assets/img/logo.png">
 
-/* latar cahaya hijau & emas */
-.orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(90% 70% at 50% 0%,#0a4a37,var(--bg) 70%)}
-.orbs i{position:absolute;border-radius:50%;filter:blur(70px);animation:fl 22s ease-in-out infinite alternate}
-.orbs i:nth-child(1){width:520px;height:520px;background:#1fa57a;opacity:.5;left:-120px;top:-100px}
-.orbs i:nth-child(2){width:440px;height:440px;background:var(--gold);opacity:.38;right:-100px;top:25%;animation-delay:-8s}
-.orbs i:nth-child(3){width:480px;height:480px;background:#0e8a63;opacity:.45;left:30%;bottom:-200px;animation-delay:-14s}
-@keyframes fl{to{transform:translate(70px,50px) scale(1.15)}}
-[data-bs-theme="light"] .orbs{background:radial-gradient(90% 70% at 50% 0%,#cdeedb,#e8f4ec 70%)}
-[data-bs-theme="light"] .orbs i{opacity:.35}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 
-/* liquid glass */
-.glass{position:relative;background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.05) 55%,rgba(255,255,255,.1));-webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%);border:1px solid rgba(255,255,255,.2);border-radius:var(--r);box-shadow:0 14px 44px rgba(0,0,0,.3),inset 0 1.5px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(255,255,255,.1),inset 0 0 26px rgba(255,255,255,.05)}
-.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 55% at 18% -8%,rgba(255,255,255,.3),transparent 55%),radial-gradient(60% 40% at 100% 100%,rgba(230,189,98,.14),transparent 70%)}
-[data-bs-theme="light"] .glass{background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.35) 55%,rgba(255,255,255,.6));border-color:rgba(255,255,255,.85);box-shadow:0 14px 40px rgba(14,107,77,.18),inset 0 1.5px 0 #fff,inset 0 -1px 0 rgba(255,255,255,.5)}
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-/* tombol */
-.btn-sk{position:relative;color:var(--tx);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:10px 20px;font-weight:600;background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s,background .2s}
-.btn-sk:hover{color:var(--tx);background:rgba(255,255,255,.18);transform:translateY(-1px)}
-.btn-sk:active{transform:scale(.97)}
-.btn-sk.gold,.btn-sk.gold:hover{background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,#c9993a);color:#3a2a05;border-color:rgba(255,245,210,.7);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),0 8px 22px rgba(230,189,98,.35)}
-.btn-sk.gold:hover{background:linear-gradient(135deg,#fff0c4,var(--gold) 55%,#d4a443)}
-[data-bs-theme="light"] .btn-sk:not(.gold){background:rgba(255,255,255,.55);border-color:rgba(14,107,77,.2)}
+  <style>
+    /* 1. Variabel & tema */
+    :root {
+      --bg: #04261c;
+      --em1: #1fa57a;
+      --em2: #0e8a63;
+      --gold: #e6bd62;
+      --gold2: #f8e6ae;
+      --tx: #f2f7f3;
+      --mut: rgba(242, 247, 243, .62);
+      --in: #6fe0b0;
+      --r: 26px;
 
-/* navbar */
-.wrap{width:min(1100px,calc(100% - 28px));margin:0 auto}
-.nb{position:sticky;top:14px;z-index:10;margin-top:14px;padding:9px 12px 9px 20px;border-radius:30px}
-.nb .lg{display:flex;align-items:center;gap:10px;font:700 22px 'Fraunces',serif;color:var(--gold2);text-decoration:none}
-.nb .lg img{width:34px}
-.nb .nav-link{padding:8px 16px;border-radius:999px;color:var(--mut);font-weight:600;transition:.2s}
-.nb .nav-link:hover{color:var(--tx);background:rgba(255,255,255,.1)}
-.nb .btn-sk{padding:8px 18px;font-size:13.5px}
-.tm{width:40px;height:40px;padding:0!important;display:grid;place-items:center;font-size:16px}
-.navbar-toggler{border:0;box-shadow:none!important;filter:invert(.9)}
-[data-bs-theme="light"] .navbar-toggler{filter:none}
-[data-bs-theme="light"] .nb .lg{color:#8a6a1c}
-[data-bs-theme="light"] .nb .nav-link:hover{background:rgba(14,107,77,.1)}
+      --bs-body-bg: var(--bg);
+      --bs-body-color: var(--tx);
+      --bs-body-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
 
-/* hero */
-.hero{text-align:center;padding:64px 24px;margin-top:22px}
-.hero img{width:112px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.35))}
-.hero h1{font-size:clamp(34px,6vw,56px);margin:6px 0 8px;background:linear-gradient(180deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);font-size:16px;max-width:560px;margin:0 auto}
-[data-bs-theme="light"] .hero h1{background:linear-gradient(180deg,#b8892b,#8a6a1c);-webkit-background-clip:text;background-clip:text}
-.cta{margin-top:26px}
-.cta .btn-sk{padding:12px 26px}
+    [data-bs-theme="light"] {
+      --bg: #e8f4ec;
+      --tx: #0b3b2b;
+      --mut: rgba(11, 59, 43, .66);
+      --in: #0b7a52;
+      --gold-text: #8a6a1c;
+    }
 
-/* seksi */
-.sec{padding:60px 0 0}
-.sec h2{text-align:center;font-size:30px;margin-bottom:6px}
-.sub2{text-align:center;color:var(--mut);margin-bottom:26px}
-.fc{padding:28px 22px;text-align:center;height:100%}
-.fc,.tc{transition:transform .3s ease,box-shadow .3s ease}
-.fc:hover,.tc:hover{transform:scale(1.05);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 30px rgba(230,189,98,.25)}
-[data-bs-theme="light"] .fc:hover,[data-bs-theme="light"] .tc:hover{box-shadow:0 20px 44px rgba(14,107,77,.25),0 0 28px rgba(184,137,43,.25)}
-.fc h3{font-size:19px;margin:14px 0 6px}
-.fc p{color:var(--mut);margin:0}
-.ic{width:60px;height:60px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:linear-gradient(135deg,rgba(230,189,98,.34),rgba(255,255,255,.08));border:1px solid rgba(248,230,174,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-.ic svg{width:28px;height:28px;stroke:var(--gold2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-[data-bs-theme="light"] .ic svg{stroke:#8a6a1c}
+    /* 2. Dasar */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-/* tim */
-.tc{padding:28px 20px;text-align:center;height:100%}
-.av{width:112px;height:112px;margin:0 auto 12px;border-radius:50%;overflow:hidden;display:grid;place-items:center;font:700 44px 'Fraunces',serif;color:#3a2a05;background:linear-gradient(135deg,var(--gold2),var(--gold));border:2px solid rgba(255,255,255,.6);box-shadow:0 10px 30px rgba(0,0,0,.3),inset 0 2px 0 #fff9}
-.av img{width:100%;height:100%;object-fit:cover}
-.tc b{display:block;font-size:16px}
-.tc small{display:block;color:var(--mut)}
-.rl{color:var(--gold2);font-weight:600;margin:2px 0}
-[data-bs-theme="light"] .rl{color:#8a6a1c}
+    body {
+      min-height: 100%;
+      overflow-x: hidden;
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--tx);
+      background: var(--bg);
+    }
 
-/* kontak */
-.cf{max-width:520px;margin:0 auto;padding:26px}
-.cf label{display:block;font-size:13px;font-weight:600;margin:12px 0 5px;color:var(--gold2)}
-.cf label:first-child{margin-top:0}
-[data-bs-theme="light"] .cf label{color:#8a6a1c}
-.cf .form-control{width:100%;padding:11px 15px;border-radius:16px;color:var(--tx);border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.18);box-shadow:inset 0 2px 6px rgba(0,0,0,.2)}
-.cf .form-control::placeholder{color:rgba(242,247,243,.4)}
-.cf .form-control:focus{border-color:var(--gold);box-shadow:0 0 0 .2rem rgba(230,189,98,.25)}
-[data-bs-theme="light"] .cf .form-control{background:rgba(255,255,255,.65);border-color:rgba(14,107,77,.25);box-shadow:inset 0 2px 5px rgba(14,107,77,.12)}
-[data-bs-theme="light"] .cf .form-control::placeholder{color:rgba(11,59,43,.4)}
-.cf .btn-sk{margin-top:18px;width:100%}
-.invalid-feedback{color:#ffb4a2}
-[data-bs-theme="light"] .invalid-feedback{color:#b3402a}
-.ok{margin-top:12px;color:var(--in);font-size:13.5px;text-align:center}
-.ft2{text-align:center;color:var(--mut);padding:56px 0 28px;font-size:13px}
+    h1, h2, h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
 
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    /* 3. Latar cahaya hijau & emas */
+    .orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: radial-gradient(90% 70% at 50% 0%, #0a4a37, var(--bg) 70%);
+    }
+
+    .orbs i {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      animation: float 22s ease-in-out infinite alternate;
+    }
+
+    .orbs i:nth-child(1) {
+      width: 520px;
+      height: 520px;
+      left: -120px;
+      top: -100px;
+      background: var(--em1);
+      opacity: .5;
+    }
+
+    .orbs i:nth-child(2) {
+      width: 440px;
+      height: 440px;
+      right: -100px;
+      top: 25%;
+      background: var(--gold);
+      opacity: .38;
+      animation-delay: -8s;
+    }
+
+    .orbs i:nth-child(3) {
+      width: 480px;
+      height: 480px;
+      left: 30%;
+      bottom: -200px;
+      background: var(--em2);
+      opacity: .45;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      to { transform: translate(70px, 50px) scale(1.15); }
+    }
+
+    [data-bs-theme="light"] .orbs {
+      background: radial-gradient(90% 70% at 50% 0%, #cdeedb, #e8f4ec 70%);
+    }
+
+    [data-bs-theme="light"] .orbs i {
+      opacity: .35;
+    }
+
+    /* 4. Komponen: liquid glass */
+    .glass {
+      position: relative;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, .17),
+        rgba(255, 255, 255, .05) 55%,
+        rgba(255, 255, 255, .1));
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--r);
+      box-shadow:
+        0 14px 44px rgba(0, 0, 0, .3),
+        inset 0 1.5px 0 rgba(255, 255, 255, .5),
+        inset 0 -1px 0 rgba(255, 255, 255, .1),
+        inset 0 0 26px rgba(255, 255, 255, .05);
+    }
+
+    .glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 55% at 18% -8%, rgba(255, 255, 255, .3), transparent 55%),
+        radial-gradient(60% 40% at 100% 100%, rgba(230, 189, 98, .14), transparent 70%);
+    }
+
+    [data-bs-theme="light"] .glass {
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, .75),
+        rgba(255, 255, 255, .35) 55%,
+        rgba(255, 255, 255, .6));
+      border-color: rgba(255, 255, 255, .85);
+      box-shadow:
+        0 14px 40px rgba(14, 107, 77, .18),
+        inset 0 1.5px 0 #fff,
+        inset 0 -1px 0 rgba(255, 255, 255, .5);
+    }
+
+    /* 5. Komponen: tombol */
+    .btn-sk {
+      position: relative;
+      padding: 10px 20px;
+      font-weight: 600;
+      color: var(--tx);
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 999px;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4);
+      transition: transform .2s, background .2s;
+    }
+
+    .btn-sk:hover {
+      color: var(--tx);
+      background: rgba(255, 255, 255, .18);
+      transform: translateY(-1px);
+    }
+
+    .btn-sk:active {
+      transform: scale(.97);
+    }
+
+    .btn-sk.gold,
+    .btn-sk.gold:hover {
+      color: #3a2a05;
+      background: linear-gradient(135deg, var(--gold2), var(--gold) 55%, #c9993a);
+      border-color: rgba(255, 245, 210, .7);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255, 255, 255, .7),
+        0 8px 22px rgba(230, 189, 98, .35);
+    }
+
+    .btn-sk.gold:hover {
+      background: linear-gradient(135deg, #fff0c4, var(--gold) 55%, #d4a443);
+    }
+
+    [data-bs-theme="light"] .btn-sk:not(.gold) {
+      background: rgba(255, 255, 255, .55);
+      border-color: rgba(14, 107, 77, .2);
+    }
+
+    /* 6. Navbar */
+    .nb {
+      position: sticky;
+      top: 14px;
+      z-index: 10;
+      margin-top: 14px;
+      padding: 9px 12px 9px 20px;
+      border-radius: 30px;
+    }
+
+    .nb .lg {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 22px 'Fraunces', serif;
+      color: var(--gold2);
+      text-decoration: none;
+    }
+
+    .nb .lg img {
+      width: 34px;
+    }
+
+    .nb .nav-link {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--mut);
+      transition: .2s;
+    }
+
+    .nb .nav-link:hover {
+      color: var(--tx);
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .nb .btn-sk {
+      padding: 8px 18px;
+      font-size: 13.5px;
+    }
+
+    .tm {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 0 !important;
+      font-size: 16px;
+    }
+
+    .navbar-toggler {
+      border: 0;
+      box-shadow: none !important;
+      filter: invert(.9);
+    }
+
+    [data-bs-theme="light"] .navbar-toggler { filter: none; }
+    [data-bs-theme="light"] .nb .lg { color: var(--gold-text); }
+    [data-bs-theme="light"] .nb .nav-link:hover { background: rgba(14, 107, 77, .1); }
+
+    /* 7. Hero */
+    .hero {
+      margin-top: 22px;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .hero img {
+      width: 112px;
+      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .35));
+    }
+
+    .hero h1 {
+      margin: 6px 0 8px;
+      font-size: clamp(34px, 6vw, 56px);
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 16px;
+      color: var(--mut);
+    }
+
+    [data-bs-theme="light"] .hero h1 {
+      background: linear-gradient(180deg, #b8892b, var(--gold-text));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .cta {
+      margin-top: 26px;
+    }
+
+    .cta .btn-sk {
+      padding: 12px 26px;
+    }
+
+    /* 8. Seksi umum */
+    .sec {
+      padding: 60px 0 0;
+    }
+
+    .sec h2 {
+      margin-bottom: 6px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .sub2 {
+      margin-bottom: 26px;
+      color: var(--mut);
+      text-align: center;
+    }
+
+    /* 9. Fitur & kartu tim */
+    .fc,
+    .tc {
+      height: 100%;
+      text-align: center;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .fc { padding: 28px 22px; }
+    .tc { padding: 28px 20px; }
+
+    .fc:hover,
+    .tc:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, .4),
+        0 0 30px rgba(230, 189, 98, .25);
+    }
+
+    [data-bs-theme="light"] .fc:hover,
+    [data-bs-theme="light"] .tc:hover {
+      box-shadow:
+        0 20px 44px rgba(14, 107, 77, .25),
+        0 0 28px rgba(184, 137, 43, .25);
+    }
+
+    .fc h3 {
+      margin: 14px 0 6px;
+      font-size: 19px;
+    }
+
+    .fc p {
+      margin: 0;
+      color: var(--mut);
+    }
+
+    .ic {
+      display: grid;
+      place-items: center;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(230, 189, 98, .34), rgba(255, 255, 255, .08));
+      border: 1px solid rgba(248, 230, 174, .45);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4);
+    }
+
+    .ic svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: var(--gold2);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    [data-bs-theme="light"] .ic svg { stroke: var(--gold-text); }
+
+    /* Tim */
+    .av {
+      display: grid;
+      place-items: center;
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 12px;
+      overflow: hidden;
+      border-radius: 50%;
+      font: 700 44px 'Fraunces', serif;
+      color: #3a2a05;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      border: 2px solid rgba(255, 255, 255, .6);
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, .3),
+        inset 0 2px 0 rgba(255, 255, 255, .6);
+    }
+
+    .av img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tc b {
+      display: block;
+      font-size: 16px;
+    }
+
+    .tc small {
+      display: block;
+      color: var(--mut);
+    }
+
+    .rl {
+      margin: 2px 0;
+      font-weight: 600;
+      color: var(--gold2);
+    }
+
+    [data-bs-theme="light"] .rl { color: var(--gold-text); }
+
+    /* 10. Form kontak */
+    .cf {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 26px;
+    }
+
+    .cf label {
+      display: block;
+      margin: 12px 0 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold2);
+    }
+
+    .cf label:first-child { margin-top: 0; }
+
+    .cf .form-control {
+      width: 100%;
+      padding: 11px 15px;
+      color: var(--tx);
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 16px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, .2);
+    }
+
+    .cf .form-control::placeholder {
+      color: rgba(242, 247, 243, .4);
+    }
+
+    .cf .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 .2rem rgba(230, 189, 98, .25);
+    }
+
+    .cf .btn-sk {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .invalid-feedback { color: #ffb4a2; }
+
+    .ok {
+      margin-top: 12px;
+      font-size: 13.5px;
+      color: var(--in);
+      text-align: center;
+    }
+
+    [data-bs-theme="light"] .cf label { color: var(--gold-text); }
+
+    [data-bs-theme="light"] .cf .form-control {
+      background: rgba(255, 255, 255, .65);
+      border-color: rgba(14, 107, 77, .25);
+      box-shadow: inset 0 2px 5px rgba(14, 107, 77, .12);
+    }
+
+    [data-bs-theme="light"] .cf .form-control::placeholder { color: rgba(11, 59, 43, .4); }
+    [data-bs-theme="light"] .invalid-feedback { color: #b3402a; }
+
+    /* 11. Footer */
+    .ft2 {
+      padding: 56px 0 28px;
+      font-size: 13px;
+      color: var(--mut);
+      text-align: center;
+    }
+
+    /* 12. Aksesibilitas */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="orbs"><i></i><i></i><i></i></div>
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
 
-<div class="wrap">
-  <header class="nb glass navbar navbar-expand-md">
-    <a class="lg navbar-brand m-0" href="#beranda"><img src="assets/img/logo.png" alt="">Sakuin</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Buka menu"><span class="navbar-toggler-icon"></span></button>
-    <nav class="collapse navbar-collapse justify-content-end" id="menu">
-      <ul class="navbar-nav align-items-md-center gap-1 pt-3 pt-md-0">
-        <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#fitur">Fitur</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tim">Tim</a></li>
-        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-        <li class="nav-item"><button class="btn-sk tm" id="tm" type="button" aria-label="Ganti tema"></button></li>
-        <li class="nav-item ms-md-1 mt-2 mt-md-0"><a class="btn-sk gold d-inline-block text-decoration-none" href="auth/login.html">Buka Aplikasi</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="wrap">
 
-  <section class="hero glass" id="beranda">
-    <img src="assets/img/logo.png" alt="Logo Sakuin">
-    <h1>Selamat Datang di Sakuin</h1>
-    <p>Catat, atur, dan pantau keuangan sakumu dengan lebih mudah dan cerdas!</p>
-    <div class="cta d-flex flex-wrap justify-content-center gap-3">
-      <a class="btn-sk text-decoration-none" href="#fitur">Pelajari Lebih Lanjut</a>
-    </div>
-  </section>
+    <!-- Navbar -->
+    <header class="nb glass navbar navbar-expand-md">
+      <a class="lg navbar-brand m-0" href="#beranda">
+        <img src="assets/img/logo.png" alt="">Sakuin
+      </a>
 
-  <section class="sec" id="fitur">
-    <h2>Fitur Unggulan Sakuin</h2><p class="sub2">Semua yang kamu butuhkan untuk mengatur uang saku, di satu tempat.</p>
-    <div class="row g-3">
-      <div class="col-12 col-md-4"><div class="glass fc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 7h13M16 3l4 4-4 4M17 17H4M8 13l-4 4 4 4"/></svg></div><h3>Catat Transaksi</h3><p>Catat pemasukan dan pengeluaran harian dengan cepat, kapan saja dan di mana saja.</p></div></div>
-      <div class="col-12 col-md-4"><div class="glass fc"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><h3>Atur Anggaran</h3><p>Tentukan batas pengeluaran tiap kategori agar uang saku tidak cepat habis.</p></div></div>
-      <div class="col-12 col-md-4"><div class="glass fc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></div><h3>Laporan Keuangan</h3><p>Lihat ringkasan dan grafik keuanganmu untuk membantu mengambil keputusan yang tepat.</p></div></div>
-    </div>
-    <div class="cta d-flex flex-wrap justify-content-center gap-3">
-      <a class="btn-sk gold text-decoration-none" href="auth/register.html">Daftar Gratis</a>
-      <a class="btn-sk text-decoration-none" href="auth/login.html">Sudah punya akun? Masuk</a>
-    </div>
-  </section>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#menu"
+              aria-controls="menu" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <section class="sec" id="tim">
-    <h2>Tim PBL Sakuin</h2><p class="sub2">Orang-orang di balik Sakuin.</p>
-    <div class="row g-3 justify-content-center mx-auto" style="max-width:680px">
-      <div class="col-12 col-md-6"><div class="glass tc"><div class="av"><img src="assets/img/pasfira.jpeg" alt="Safira Maharani Putri" onerror="this.replaceWith('SM')"></div><b>Safira Maharani Putri</b><div class="rl">Ketua Tim</div><small>NIM 3312601033</small></div></div>
-      <div class="col-12 col-md-6"><div class="glass tc"><div class="av"><img src="assets/img/pasgizel.jpg" alt="Ghizella Rahma Azzahra" onerror="this.replaceWith('GR')"></div><b>Ghizella Rahma Azzahra</b><div class="rl">Anggota Tim</div><small>NIM 3312601032</small></div></div>
-    </div>
-  </section>
+      <nav class="collapse navbar-collapse justify-content-end" id="menu">
+        <ul class="navbar-nav align-items-md-center gap-1 pt-3 pt-md-0">
+          <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#fitur">Fitur</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tim">Tim</a></li>
+          <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+          <li class="nav-item">
+            <button class="btn-sk tm" id="tm" type="button" aria-label="Ganti tema"></button>
+          </li>
+          <li class="nav-item ms-md-1 mt-2 mt-md-0">
+            <a class="btn-sk gold d-inline-block text-decoration-none" href="auth/login.html">Buka Aplikasi</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <section class="sec" id="kontak">
-    <h2>Hubungi Kami</h2><p class="sub2">Ada pertanyaan atau saran? Kirim pesan ke kami.</p>
-    <form class="glass cf" id="kf" novalidate>
-      <label for="nama">Nama Lengkap</label>
-      <input id="nama" name="nama" class="form-control" required placeholder="Masukkan nama Anda">
-      <div class="invalid-feedback">Nama wajib diisi.</div>
-      <label for="email">Alamat Email</label>
-      <input id="email" name="email" type="email" class="form-control" required placeholder="Masukkan email Anda">
-      <div class="invalid-feedback">Masukkan alamat email yang valid.</div>
-      <label for="pesan">Pesan</label>
-      <textarea id="pesan" name="pesan" rows="4" class="form-control" required placeholder="Tulis pesan Anda di sini..."></textarea>
-      <div class="invalid-feedback">Pesan wajib diisi.</div>
-      <button class="btn-sk gold" type="submit">Kirim Pesan</button>
-      <div class="ok" id="ok" role="status"></div>
-    </form>
-  </section>
-  <footer class="ft2">© 2026 Sakuin</footer>
-</div>
+    <main>
+      <!-- Hero -->
+      <section class="hero glass" id="beranda">
+        <img src="assets/img/logo.png" alt="Logo Sakuin">
+        <h1>Selamat Datang di Sakuin</h1>
+        <p>Catat, atur, dan pantau keuangan sakumu dengan lebih mudah dan cerdas!</p>
+        <div class="cta d-flex flex-wrap justify-content-center gap-3">
+          <a class="btn-sk text-decoration-none" href="#fitur">Pelajari Lebih Lanjut</a>
+        </div>
+      </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const root=document.documentElement, tm=document.getElementById('tm');
-  const setTema=t=>{root.setAttribute('data-bs-theme',t);tm.textContent=t==='dark'?'🌙':'☀️';try{localStorage.setItem('sakuin-tema',t)}catch(e){}};
-  let s;try{s=localStorage.getItem('sakuin-tema')}catch(e){}
-  setTema(s||'dark');
-  tm.addEventListener('click',()=>setTema(root.getAttribute('data-bs-theme')==='dark'?'light':'dark'));
+      <!-- Fitur -->
+      <section class="sec" id="fitur">
+        <h2>Fitur Unggulan Sakuin</h2>
+        <p class="sub2">Semua yang kamu butuhkan untuk mengatur uang saku, di satu tempat.</p>
 
-  const f=document.getElementById('kf'),ok=document.getElementById('ok');
-  f.addEventListener('submit',e=>{
-    e.preventDefault();f.classList.add('was-validated');
-    if(!f.checkValidity())return;
-    ok.textContent='Terima kasih, '+f.nama.value.trim()+'! Pesanmu sudah terkirim.';
-    f.reset();f.classList.remove('was-validated');
-  });
-</script>
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <div class="glass fc">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h13M16 3l4 4-4 4M17 17H4M8 13l-4 4 4 4"/></svg>
+              </div>
+              <h3>Catat Transaksi</h3>
+              <p>Catat pemasukan dan pengeluaran harian dengan cepat, kapan saja dan di mana saja.</p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="glass fc">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+              </div>
+              <h3>Atur Anggaran</h3>
+              <p>Tentukan batas pengeluaran tiap kategori agar uang saku tidak cepat habis.</p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="glass fc">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+              </div>
+              <h3>Laporan Keuangan</h3>
+              <p>Lihat ringkasan dan grafik keuanganmu untuk membantu mengambil keputusan yang tepat.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta d-flex flex-wrap justify-content-center gap-3">
+          <a class="btn-sk gold text-decoration-none" href="auth/register.html">Daftar Gratis</a>
+          <a class="btn-sk text-decoration-none" href="auth/login.html">Sudah punya akun? Masuk</a>
+        </div>
+      </section>
+
+      <!-- Tim -->
+      <section class="sec" id="tim">
+        <h2>Tim PBL Sakuin</h2>
+        <p class="sub2">Orang-orang di balik Sakuin.</p>
+
+        <div class="row g-3 justify-content-center mx-auto" style="max-width: 680px">
+          <div class="col-12 col-md-6">
+            <div class="glass tc">
+              <div class="av">
+                <img src="assets/img/pasfira.jpeg" alt="Safira Maharani Putri" onerror="this.replaceWith('SM')">
+              </div>
+              <b>Safira Maharani Putri</b>
+              <div class="rl">Ketua Tim</div>
+              <small>NIM 3312601033</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="glass tc">
+              <div class="av">
+                <img src="assets/img/pasgizel.jpg" alt="Ghizella Rahma Azzahra" onerror="this.replaceWith('GR')">
+              </div>
+              <b>Ghizella Rahma Azzahra</b>
+              <div class="rl">Anggota Tim</div>
+              <small>NIM 3312601032</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kontak -->
+      <section class="sec" id="kontak">
+        <h2>Hubungi Kami</h2>
+        <p class="sub2">Ada pertanyaan atau saran? Kirim pesan ke kami.</p>
+
+        <form class="glass cf" id="kf" novalidate>
+          <label for="nama">Nama Lengkap</label>
+          <input id="nama" name="nama" class="form-control" required placeholder="Masukkan nama Anda">
+          <div class="invalid-feedback">Nama wajib diisi.</div>
+
+          <label for="email">Alamat Email</label>
+          <input id="email" name="email" type="email" class="form-control" required placeholder="Masukkan email Anda">
+          <div class="invalid-feedback">Masukkan alamat email yang valid.</div>
+
+          <label for="pesan">Pesan</label>
+          <textarea id="pesan" name="pesan" rows="4" class="form-control" required placeholder="Tulis pesan Anda di sini..."></textarea>
+          <div class="invalid-feedback">Pesan wajib diisi.</div>
+
+          <button class="btn-sk gold" type="submit">Kirim Pesan</button>
+          <div class="ok" id="ok" role="status"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="ft2">© 2026 Sakuin</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* ---------- Tema gelap / terang ---------- */
+    const STORAGE_KEY = 'sakuin-tema';
+    const root = document.documentElement;
+    const tombolTema = document.getElementById('tm');
+
+    function simpanTema(tema) {
+      try { localStorage.setItem(STORAGE_KEY, tema); } catch (e) { /* abaikan */ }
+    }
+
+    function ambilTema() {
+      try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+    }
+
+    function setTema(tema) {
+      root.setAttribute('data-bs-theme', tema);
+      tombolTema.textContent = tema === 'dark' ? '🌙' : '☀️';
+      simpanTema(tema);
+    }
+
+    setTema(ambilTema() || 'dark');
+
+    tombolTema.addEventListener('click', () => {
+      const sekarang = root.getAttribute('data-bs-theme');
+      setTema(sekarang === 'dark' ? 'light' : 'dark');
+    });
+
+    /* ---------- Form kontak ---------- */
+    const form = document.getElementById('kf');
+    const pesanOk = document.getElementById('ok');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.classList.add('was-validated');
+
+      if (!form.checkValidity()) return;
+
+      pesanOk.textContent = `Terima kasih, ${form.nama.value.trim()}! Pesanmu sudah terkirim.`;
+      form.reset();
+      form.classList.remove('was-validated');
+    });
+  </script>
 </body>
 </html>

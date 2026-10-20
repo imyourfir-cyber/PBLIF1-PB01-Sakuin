@@ -1,31 +1,97 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Transaksi – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transaksi – Sakuin</title>
+  <link rel="icon" href="../assets/img/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Gaya aplikasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body data-page="transaksi" data-title="Transaksi">
-<div id="content">
-<div class="glass pad">
-  <form class="bar" id="fl">
-    <input name="q" placeholder="Cari kata kunci">
-    <select name="jenis"><option value="">Semua Jenis</option><option>Pemasukan</option><option>Pengeluaran</option></select>
-    <select name="kategori" id="kf"></select>
-    <input type="date" name="dari" title="Dari tanggal"><input type="date" name="sampai" title="Sampai tanggal">
-    <button class="btn">Filter</button>
-    <button type="button" class="btn gold" id="add">+ Tambah Transaksi</button>
-  </form>
-  <div class="tw"><table>
-    <thead><tr><th>No</th><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th class="n">Nominal</th><th>Keterangan</th><th class="n">Aksi</th></tr></thead><tbody id="tb"></tbody></table></div>
-</div>
-<div class="ov" id="m-trx"><form class="glass modal" data-demo="Transaksi berhasil disimpan (demo)."><input type="hidden" name="id">
-  <h3 data-add="Tambah Transaksi" data-edit="Ubah Transaksi">Tambah Transaksi</h3>
-  <label>Tanggal *</label><input type="date" name="tanggal" required>
-  <label>Jenis *</label><select name="jenis" onchange="filterKat(this.form)"><option>Pemasukan</option><option>Pengeluaran</option></select>
-  <label>Kategori *</label><select name="kategori" id="kopt" required></select>
-  <label>Nominal *</label><input type="number" name="nominal" min="1" step="1" required placeholder="Rp 0">
-  <label>Keterangan</label><textarea name="keterangan" rows="2" maxlength="200" placeholder="Tulis keterangan"></textarea>
-  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
-</div>
-<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script src="../assets/js/transaksi.js"></script>
-</body></html>
+  <div id="content">
+
+    <!-- Filter + tabel transaksi -->
+    <div class="glass pad">
+      <form class="bar" id="fl">
+        <input name="q" placeholder="Cari kata kunci">
+
+        <select name="jenis">
+          <option value="">Semua Jenis</option>
+          <option>Pemasukan</option>
+          <option>Pengeluaran</option>
+        </select>
+
+        <select name="kategori" id="kf"></select>
+
+        <input type="date" name="dari" title="Dari tanggal">
+        <input type="date" name="sampai" title="Sampai tanggal">
+
+        <button class="btn">Filter</button>
+        <button type="button" class="btn gold" id="add">+ Tambah Transaksi</button>
+      </form>
+
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Tanggal</th>
+              <th>Jenis</th>
+              <th>Kategori</th>
+              <th class="n">Nominal</th>
+              <th>Keterangan</th>
+              <th class="n">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal tambah / ubah transaksi -->
+    <div class="ov" id="m-trx">
+      <form class="glass modal" data-demo="Transaksi berhasil disimpan (demo).">
+        <input type="hidden" name="id">
+
+        <h3 data-add="Tambah Transaksi" data-edit="Ubah Transaksi">Tambah Transaksi</h3>
+
+        <label>Tanggal *</label>
+        <input type="date" name="tanggal" required>
+
+        <label>Jenis *</label>
+        <select name="jenis" onchange="filterKat(this.form)">
+          <option>Pemasukan</option>
+          <option>Pengeluaran</option>
+        </select>
+
+        <label>Kategori *</label>
+        <select name="kategori" id="kopt" required></select>
+
+        <label>Nominal *</label>
+        <input type="number" name="nominal" min="1" step="1" required placeholder="Rp 0">
+
+        <label>Keterangan</label>
+        <textarea name="keterangan" rows="2" maxlength="200" placeholder="Tulis keterangan"></textarea>
+
+        <div class="acts">
+          <button type="button" class="btn" onclick="closeM()">Batal</button>
+          <button class="btn gold">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/transaksi.js"></script>
+</body>
+</html>

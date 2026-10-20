@@ -1,24 +1,78 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kategori – Sakuin</title><link rel="icon" href="../assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kategori – Sakuin</title>
+  <link rel="icon" href="../assets/img/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Gaya aplikasi -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body data-page="kategori" data-title="Kategori">
-<div id="content">
-<div class="glass pad">
-  <form class="bar" id="fl">
-    <div class="seg"><a href="#" class="on" data-j="Pemasukan">Pemasukan</a><a href="#" data-j="Pengeluaran">Pengeluaran</a></div>
-    <input name="q" placeholder="Cari kategori"><button class="btn">Cari</button>
-    <button type="button" class="btn gold" id="add">+ Tambah Kategori</button>
-  </form>
-  <div class="tw"><table><thead><tr><th>No</th><th>Nama Kategori</th><th class="n">Total Transaksi</th><th class="n">Aksi</th></tr></thead><tbody id="tb"></tbody></table></div>
-</div>
-<div class="ov" id="m-kat"><form class="glass modal" data-demo="Kategori berhasil disimpan (demo)."><input type="hidden" name="id">
-  <h3 data-add="Tambah Kategori" data-edit="Ubah Kategori">Tambah Kategori</h3>
-  <label>Nama kategori *</label><input name="nama" required maxlength="50" placeholder="Masukkan nama kategori">
-  <label>Jenis *</label><select name="jenis"><option>Pemasukan</option><option>Pengeluaran</option></select>
-  <div class="acts"><button type="button" class="btn" onclick="closeM()">Batal</button><button class="btn gold">Simpan</button></div></form></div>
-</div>
-<script src="../assets/js/data.js"></script><script src="../assets/js/app.js"></script>
-<script src="../assets/js/kategori.js"></script>
-</body></html>
+  <div id="content">
+
+    <!-- Filter + tabel kategori -->
+    <div class="glass pad">
+      <form class="bar" id="fl">
+        <div class="seg">
+          <a href="#" class="on" data-j="Pemasukan">Pemasukan</a>
+          <a href="#" data-j="Pengeluaran">Pengeluaran</a>
+        </div>
+
+        <input name="q" placeholder="Cari kategori">
+        <button class="btn">Cari</button>
+        <button type="button" class="btn gold" id="add">+ Tambah Kategori</button>
+      </form>
+
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Kategori</th>
+              <th class="n">Total Transaksi</th>
+              <th class="n">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal tambah / ubah kategori -->
+    <div class="ov" id="m-kat">
+      <form class="glass modal" data-demo="Kategori berhasil disimpan (demo).">
+        <input type="hidden" name="id">
+
+        <h3 data-add="Tambah Kategori" data-edit="Ubah Kategori">Tambah Kategori</h3>
+
+        <label>Nama kategori *</label>
+        <input name="nama" required maxlength="50" placeholder="Masukkan nama kategori">
+
+        <label>Jenis *</label>
+        <select name="jenis">
+          <option>Pemasukan</option>
+          <option>Pengeluaran</option>
+        </select>
+
+        <div class="acts">
+          <button type="button" class="btn" onclick="closeM()">Batal</button>
+          <button class="btn gold">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/kategori.js"></script>
+</body>
+</html>
