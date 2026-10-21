@@ -198,7 +198,7 @@ function filterKat(f) {
   }
 }
 
-/* 16. Hapus data (demo) */
+/* 16. Hapus data */
 
 function hapus(btn) {                          // NFR-02
   window._b = btn;
@@ -206,9 +206,36 @@ function hapus(btn) {                          // NFR-02
 }
 
 function konfirmHapus() {
-  window._b?.closest('tr,.item')?.remove();
+  const btn = window._b;
   closeM();
-  toast('Data berhasil dihapus (demo).');
+  if (!btn) return;
+
+  // id diambil dari tombol Edit di sebelahnya (data-d)
+  const el = btn.parentElement.querySelector('[data-d]');
+  const id = el ? JSON.parse(el.dataset.d).id : null;
+  const hal = document.body.dataset.page;
+  const buang = (arr, f) => { for (let i = arr.length - 1; i >= 0; i--) if (f(arr[i])) arr.splice(i, 1); };
+
+  if (id == null) return toast('Data tidak ditemukan.', true);
+
+  if (hal === 'transaksi') {
+    buang(T, t => t.id == id);
+    simpan('trx', T);
+  } else if (hal === 'kategori') {
+    if (T.some(t => t.kat == id)) return toast('Kategori masih dipakai transaksi, hapus transaksinya dulu.', true);
+    buang(K, k => k.id == id);
+    buang(A, a => a.kat == id);
+    simpan('kat', K); simpan('ang', A);
+  } else if (hal === 'anggaran') {
+    buang(A, a => a.id == id);
+    simpan('ang', A);
+  } else if (hal === 'tabungan') {
+    buang(TB, t => t.id == id);
+    buang(S, s => s.tb == id);
+    simpan('tb', TB); simpan('set', S);
+  }
+
+  selesai('Data berhasil dihapus.');
 }
 
 /* 17. Form modal (demo)

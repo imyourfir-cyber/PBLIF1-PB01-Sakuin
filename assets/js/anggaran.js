@@ -37,7 +37,7 @@ const kartu = r => {
         <span></span>
         <span>
           <button type="button" class="btn sm" onclick="openM('m-ang',this)"
-            data-d="${dj({ kategori: r.kat ?? '', batas: r.batas })}">Edit</button>
+            data-d="${dj({ id: r.id, kategori: r.kat ?? '', batas: r.batas })}">Edit</button>
           <button type="button" class="btn sm dng" onclick="hapus(this)">Hapus</button>
         </span>
       </div>
@@ -48,3 +48,20 @@ $('#gr').innerHTML = anggaran().map(kartu).join('') || `
   <div class="glass pad empty" style="grid-column:1/-1">
     Belum ada batas. Klik "+ Atur Batas" untuk membuat batas total bulanan atau per kategori.
   </div>`;
+
+/* 22. Simpan batas (tambah / ubah) */
+
+$('#m-ang form').onsubmit = ev => {
+  ev.preventDefault();
+  const f = ev.target.elements;
+  const kategori = f.kategori.value ? +f.kategori.value : null;
+  const batas = +f.batas.value;
+
+  // satu batas per kategori: kalau sudah ada, ubah nilainya
+  const ada = A.find(a => a.kat === kategori);
+  if (ada) ada.batas = batas;
+  else A.push({ id: nextId(A), kat: kategori, batas });
+
+  simpan('ang', A);
+  selesai('Batas pengeluaran disimpan.');
+};

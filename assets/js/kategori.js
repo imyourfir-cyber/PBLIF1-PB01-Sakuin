@@ -57,3 +57,20 @@ $('#fl').onsubmit = ev => {
 };
 
 render();
+
+/* ---------- Simpan (tambah / ubah) ---------- */
+
+$('#m-kat form').onsubmit = ev => {
+  ev.preventDefault();
+  const f = ev.target.elements;
+  const nama = f.nama.value.trim(), jenis = f.jenis.value;
+
+  if (K.some(k => k.id != f.id.value && k.nama.toLowerCase() === nama.toLowerCase() && k.jenis === jenis))
+    return toast('Kategori sudah ada.', true);
+
+  if (f.id.value) Object.assign(K.find(k => k.id == f.id.value), { nama, jenis });
+  else K.push({ id: nextId(K), nama, jenis });
+
+  simpan('kat', K);
+  selesai('Kategori berhasil disimpan.');
+};

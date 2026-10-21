@@ -81,3 +81,19 @@ $('#fl').onsubmit = ev => {
 };
 
 render();
+
+/* ---------- Simpan (tambah / ubah) ---------- */
+
+$('#m-trx form').onsubmit = ev => {
+  ev.preventDefault();
+  const f = ev.target.elements;
+  const d = { tgl: f.tanggal.value, kat: +f.kategori.value, nom: +f.nominal.value, ket: f.keterangan.value.trim() };
+
+  if (!d.kat) return toast('Pilih kategori dulu.', true);
+
+  if (f.id.value) Object.assign(T.find(t => t.id == f.id.value), d);
+  else T.push({ id: nextId(T), ...d });
+
+  simpan('trx', T);
+  selesai('Transaksi berhasil disimpan.');
+};

@@ -48,3 +48,27 @@ const kosongHtml = `
 
 // terbaru dulu (salinan array, TB asli tidak diubah)
 $('#gr').innerHTML = [...TB].reverse().map(kartuHtml).join('') || kosongHtml;
+
+/* ---------- Simpan target & setoran ---------- */
+
+$('#m-tgt form').onsubmit = ev => {
+  ev.preventDefault();
+  const f = ev.target.elements;
+  const d = { nama: f.nama.value.trim(), target: +f.target.value };
+
+  if (f.id.value) Object.assign(TB.find(t => t.id == f.id.value), d);
+  else TB.push({ id: nextId(TB), ...d });
+
+  simpan('tb', TB);
+  selesai('Target tabungan disimpan.');
+};
+
+$('#m-setor form').onsubmit = ev => {
+  ev.preventDefault();
+  const f = ev.target.elements;
+
+  S.push({ tgl: f.tanggal.value, tb: +f.id.value, nom: +f.nominal.value });
+
+  simpan('set', S);
+  selesai('Setoran berhasil. Makin dekat ke targetmu!');
+};

@@ -72,19 +72,47 @@ function simpanMe() {
   }
 }
 
-/*  4. Data keuangan dummy */
+/*  4a. Penyimpanan data keuangan (localStorage, terpisah per akun) */
+
+const KEY = n => `sk_${localStorage.sk_session || 'tamu'}_${n}`;
+
+// ambil data tersimpan; kalau belum ada pakai data awal (seed)
+function muat(n, seed) {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY(n)));
+    if (Array.isArray(d)) return d;
+  } catch (_) { /* rusak -> pakai seed */ }
+  return seed;
+}
+
+// simpan array ke localStorage
+function simpan(n, arr) {
+  try { localStorage.setItem(KEY(n), JSON.stringify(arr)); return true; }
+  catch (_) { return false; }
+}
+
+// id berikutnya untuk array
+const nextId = arr => Math.max(0, ...arr.map(x => x.id || 0)) + 1;
+
+// simpan, tampilkan notifikasi setelah halaman dimuat ulang
+function selesai(pesan) {
+  sessionStorage.flash = pesan;
+  location.reload();
+}
+
+/*  4. Data keuangan (dummy sebagai data awal) */
 
 // Kategori
-const K = [
+const K = muat('kat', [
   { id: 1, nama: 'Uang Saku', jenis: 'Pemasukan' },
   { id: 2, nama: 'Beasiswa', jenis: 'Pemasukan' },
   { id: 3, nama: 'Makan', jenis: 'Pengeluaran' },
   { id: 4, nama: 'Transportasi', jenis: 'Pengeluaran' },
   { id: 5, nama: 'Hiburan', jenis: 'Pengeluaran' },
-];
+]);
 
 // Transaksi (kat = id kategori)
-const T = [
+const T = muat('trx', [
   { id: 1, tgl: D(1), kat: 1, nom: 1500000, ket: 'Kiriman bulanan' },
   { id: 2, tgl: D(3), kat: 2, nom: 2000000, ket: 'Beasiswa semester ganjil' },
   { id: 3, tgl: D(2), kat: 3, nom: 45000, ket: 'Makan siang kantin' },
@@ -94,27 +122,27 @@ const T = [
   { id: 7, tgl: D(9), kat: 3, nom: 85000, ket: 'Belanja bahan makanan' },
   { id: 8, tgl: D(10), kat: 4, nom: 50000, ket: 'Isi bensin' },
   { id: 9, tgl: D(12), kat: 3, nom: 90000, ket: 'Makan malam' },
-];
+]);
 
 // Anggaran (kat = null berarti batas total bulanan)
-const A = [
+const A = muat('ang', [
   { id: 1, kat: null, batas: 2000000 },
   { id: 2, kat: 3, batas: 300000 },
   { id: 3, kat: 5, batas: 150000 },
-];
+]);
 
 // Target tabungan
-const TB = [
+const TB = muat('tb', [
   { id: 1, nama: 'Laptop baru', target: 8000000 },
   { id: 2, nama: 'Dana darurat', target: 2000000 },
-];
+]);
 
 // Setoran tabungan (tb = id target)
-const S = [
+const S = muat('set', [
   { tgl: D(5), tb: 1, nom: 500000 },
   { tgl: D(8), tb: 1, nom: 300000 },
   { tgl: D(11), tb: 2, nom: 200000 },
-];
+]);
 
 /* 5. Fungsi bantu: format*/
 
