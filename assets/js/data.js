@@ -36,22 +36,8 @@ const SAVE = u => {
   }
 };
 
-// permintaan reset password
-const REQS = () => {
-  try {
-    return JSON.parse(localStorage.sk_reset) || [];
-  } catch (_) {
-    return [];
-  }
-};
-
-const SAVEREQ = r => {
-  localStorage.sk_reset = JSON.stringify(r);
-};
-
-// Admin: tujuan email reset password + kode masuk panel admin
+// Email admin: tujuan permintaan reset password (dikirim lewat aplikasi email)
 const ADMINS = ['imyourfir@gmail.com', 'ghizellarahmaazzahra@gmail.com'];
-const KODE_ADMIN = 'sakuin-admin';
 
 /* 3. Akun yang sedang login (ME)
    Nama di topbar & sapaan dashboard mengikuti ini. */

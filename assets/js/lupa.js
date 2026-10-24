@@ -22,7 +22,7 @@ function buatMailto(req) {
   );
 }
 
-/* ---------- Cari akun & simpan permintaan ---------- */
+/* ---------- Cari akun ---------- */
 
 function cariAkun(username, email) {
   const un = username.trim().toLowerCase();
@@ -31,23 +31,6 @@ function cariAkun(username, email) {
   return USERS().find(
     u => u.username.toLowerCase() === un && (u.email || '').toLowerCase() === em
   );
-}
-
-function simpanPermintaan(user) {
-  const req = {
-    id: Date.now(),
-    username: user.username,
-    nama: user.nama,
-    email: user.email,
-    waktu: new Date().toLocaleString('id-ID'),
-    status: 'Menunggu',
-  };
-
-  // satu pengguna hanya punya satu permintaan yang menunggu
-  const sisa = REQS().filter(r => !(r.username === user.username && r.status === 'Menunggu'));
-  SAVEREQ(sisa.concat(req));
-
-  return req;
 }
 
 /* ---------- Form ---------- */
@@ -62,7 +45,12 @@ $('#f').onsubmit = ev => {
     return;
   }
 
-  const req = simpanPermintaan(user);
+  const req = {
+    nama: user.nama,
+    username: user.username,
+    email: user.email,
+    waktu: new Date().toLocaleString('id-ID'),
+  };
   const link = buatMailto(req);
 
   f.hidden = true;
